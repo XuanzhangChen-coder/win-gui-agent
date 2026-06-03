@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.1.1 - 2026-06-03
 
 - Added an LTspice real-software trial that installs/launches LTspice 26, handles first-run dialogs, opens the bundled `2ndOrderLowpass` schematic, and extends the engineering suite to run KiCad plus LTspice.
 

@@ -179,7 +179,7 @@ python3 client/run_suite.py examples/engineering-suite.json \
 ```
 
 Setup details: [docs/setup.md](docs/setup.md). API details: [docs/api.md](docs/api.md). Troubleshooting: [docs/troubleshooting.md](docs/troubleshooting.md).
-Open-source checklist: [docs/open-source-checklist.md](docs/open-source-checklist.md). Release notes: [docs/release-notes-v0.1.0.md](docs/release-notes-v0.1.0.md). Contributing: [CONTRIBUTING.md](CONTRIBUTING.md). Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md).
+Open-source checklist: [docs/open-source-checklist.md](docs/open-source-checklist.md). Release notes: [docs/release-notes-v0.1.1.md](docs/release-notes-v0.1.1.md). Contributing: [CONTRIBUTING.md](CONTRIBUTING.md). Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md).
 
 Create and validate a clean source export before publishing:
 
