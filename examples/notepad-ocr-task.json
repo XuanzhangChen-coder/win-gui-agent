@@ -1,0 +1,87 @@
+{
+  "name": "notepad-ocr-demo",
+  "retry": 1,
+  "retryDelayMs": 500,
+  "steps": [
+    {
+      "label": "reset notepad state",
+      "action": "run",
+      "file": "powershell.exe",
+      "arguments": "-NoProfile -ExecutionPolicy Bypass -Command \"Get-Process notepad -ErrorAction SilentlyContinue | Stop-Process -Force; New-Item -ItemType Directory -Path C:\\\\GuiAgent\\\\scratch -Force | Out-Null; Set-Content -Path C:\\\\GuiAgent\\\\scratch\\\\wga-notepad-ocr.txt -Value '' -NoNewline -Encoding UTF8\""
+    },
+    {
+      "label": "wait after reset",
+      "sleepMs": 500
+    },
+    {
+      "label": "open notepad",
+      "action": "run",
+      "file": "notepad.exe",
+      "arguments": "C:\\GuiAgent\\scratch\\wga-notepad-ocr.txt",
+      "waitForWindowTitleContains": "wga-notepad-ocr",
+      "waitTimeoutMs": 10000,
+      "delayMs": 700
+    },
+    {
+      "label": "activate notepad",
+      "action": "activate_window",
+      "titleContains": "wga-notepad-ocr",
+      "expect": {
+        "activeWindowTitleContains": "wga-notepad-ocr"
+      }
+    },
+    {
+      "label": "maximize notepad",
+      "action": "maximize_window",
+      "titleContains": "wga-notepad-ocr",
+      "expect": {
+        "activeWindowTitleContains": "wga-notepad-ocr"
+      }
+    },
+    {
+      "label": "write ocr target text",
+      "action": "uia_set_text",
+      "windowTitleContains": "wga-notepad-ocr",
+      "controlType": "Document",
+      "text": "gui agent ocr target line one\\nvisible next cancel install words",
+      "expect": {
+        "uiaExists": {
+          "windowTitleContains": "wga-notepad-ocr",
+          "controlType": "Document",
+          "nameContains": "文本编辑器",
+          "includeOffscreen": false,
+          "limit": 1
+        }
+      }
+    },
+    {
+      "label": "verify text by bounded ocr",
+      "verify": {
+        "ocrTextContains": {
+          "text": "target",
+          "language": "eng",
+          "psm": 6,
+          "left": 0,
+          "top": 70,
+          "right": 320,
+          "bottom": 135
+        }
+      }
+    },
+    {
+      "label": "click target by bounded ocr",
+      "action": "ocr_click_text",
+      "text": "target",
+      "language": "eng",
+      "psm": 6,
+      "minConfidence": 40,
+      "left": 0,
+      "top": 70,
+      "right": 320,
+      "bottom": 135,
+      "expect": {
+        "activeWindowTitleContains": "wga-notepad-ocr"
+      }
+    }
+  ]
+}

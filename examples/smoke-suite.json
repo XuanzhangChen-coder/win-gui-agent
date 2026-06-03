@@ -1,0 +1,27 @@
+{
+  "name": "wga-smoke-suite",
+  "loops": 1,
+  "delayMs": 500,
+  "tasks": [
+    {
+      "label": "text pad ocr",
+      "path": "examples/text-pad-ocr-task.json"
+    },
+    {
+      "label": "settings about",
+      "path": "examples/settings-about-task.json"
+    },
+    {
+      "label": "edge browser",
+      "path": "examples/edge-browser-task.json"
+    },
+    {
+      "label": "installer wizard",
+      "path": "examples/installer-wizard-task.json"
+    },
+    {
+      "label": "vivado smoke",
+      "path": "examples/vivado-smoke-task.json"
+    }
+  ]
+}

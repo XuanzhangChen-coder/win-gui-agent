@@ -1,0 +1,80 @@
+{
+  "name": "settings-about-demo",
+  "retry": 2,
+  "retryDelayMs": 800,
+  "steps": [
+    {
+      "label": "close old settings window",
+      "action": "run",
+      "file": "powershell.exe",
+      "arguments": "-NoProfile -ExecutionPolicy Bypass -Command \"Get-Process SystemSettings -ErrorAction SilentlyContinue | Stop-Process -Force\""
+    },
+    {
+      "label": "wait after settings reset",
+      "sleepMs": 700
+    },
+    {
+      "label": "open settings about page",
+      "action": "run",
+      "file": "explorer.exe",
+      "arguments": "ms-settings:about",
+      "delayMs": 500
+    },
+    {
+      "label": "wait for settings window",
+      "timeoutMs": 10000,
+      "intervalMs": 500,
+      "waitFor": {
+        "activeWindowTitleContains": "设置"
+      }
+    },
+    {
+      "label": "verify settings search box",
+      "verify": {
+        "uiaExists": {
+          "windowTitleContains": "设置",
+          "controlType": "Edit",
+          "nameContains": "搜索框",
+          "includeOffscreen": false,
+          "limit": 1
+        }
+      }
+    },
+    {
+      "label": "verify about breadcrumb",
+      "verify": {
+        "uiaExists": {
+          "windowTitleContains": "设置",
+          "controlType": "Button",
+          "nameContains": "系统信息",
+          "includeOffscreen": false,
+          "limit": 1
+        }
+      }
+    },
+    {
+      "label": "focus settings search box",
+      "action": "uia_click",
+      "windowTitleContains": "设置",
+      "controlType": "Edit",
+      "nameContains": "搜索框",
+      "includeOffscreen": false,
+      "expect": {
+        "activeWindowTitleContains": "设置"
+      }
+    },
+    {
+      "label": "type harmless settings query",
+      "action": "type",
+      "text": "display",
+      "expect": {
+        "activeWindowTitleContains": "设置"
+      }
+    },
+    {
+      "label": "close settings",
+      "action": "close_window",
+      "titleContains": "设置"
+    }
+  ]
+}

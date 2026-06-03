@@ -1,0 +1,11 @@
+{
+  "name": "wga-engineering-suite",
+  "loops": 1,
+  "delayMs": 1000,
+  "tasks": [
+    {
+      "label": "kicad pic programmer",
+      "path": "examples/kicad-pic-programmer-task.json"
+    }
+  ]
+}

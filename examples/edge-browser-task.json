@@ -1,0 +1,77 @@
+{
+  "name": "edge-browser-demo",
+  "retry": 2,
+  "retryDelayMs": 800,
+  "steps": [
+    {
+      "label": "reset old edge",
+      "action": "run",
+      "file": "powershell.exe",
+      "arguments": "-NoProfile -ExecutionPolicy Bypass -Command \"Get-Process msedge -ErrorAction SilentlyContinue | Stop-Process -Force\"",
+      "delayMs": 700
+    },
+    {
+      "label": "open local browser trial",
+      "action": "run",
+      "file": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+      "arguments": "--new-window --user-data-dir=C:\\GuiAgent\\edge-profile --no-first-run --disable-features=msEdgeFirstRunExperience file:///C:/GuiAgent/win-gui-agent/examples/browser-trial.html",
+      "delayMs": 2500
+    },
+    {
+      "label": "wait for browser title",
+      "timeoutMs": 10000,
+      "intervalMs": 500,
+      "waitFor": {
+        "activeWindowTitleContains": "WGA Browser Trial"
+      }
+    },
+    {
+      "label": "verify page text by ocr",
+      "verify": {
+        "ocrTextContains": {
+          "text": "Confirm",
+          "language": "eng",
+          "psm": 6,
+          "left": 0,
+          "top": 80,
+          "right": 900,
+          "bottom": 520
+        }
+      }
+    },
+    {
+      "label": "click page button by ocr",
+      "action": "ocr_click_text",
+      "text": "Confirm",
+      "language": "eng",
+      "psm": 6,
+      "minConfidence": 50,
+      "left": 0,
+      "top": 80,
+      "right": 900,
+      "bottom": 520,
+      "expect": {
+        "activeWindowTitleContains": "WGA Browser Trial Confirmed"
+      }
+    },
+    {
+      "label": "verify confirmed status by ocr",
+      "verify": {
+        "ocrTextContains": {
+          "text": "confirmed",
+          "language": "eng",
+          "psm": 6,
+          "left": 0,
+          "top": 250,
+          "right": 900,
+          "bottom": 520
+        }
+      }
+    },
+    {
+      "label": "close edge",
+      "action": "close_window",
+      "titleContains": "WGA Browser Trial"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN" translate="no">
+<head>
+  <meta charset="utf-8">
+  <title>WGA Browser Trial</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google" content="notranslate">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+    }
+    main {
+      max-width: 780px;
+      margin: 72px auto;
+      padding: 0 32px;
+    }
+    h1 {
+      font-size: 38px;
+      font-weight: 650;
+      margin: 0 0 16px;
+      letter-spacing: 0;
+    }
+    p {
+      font-size: 18px;
+      line-height: 1.55;
+      margin: 0 0 24px;
+    }
+    button {
+      border: 0;
+      border-radius: 6px;
+      background: #1565c0;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 14px 22px;
+      cursor: pointer;
+    }
+    button:focus {
+      outline: 3px solid #78aaf2;
+      outline-offset: 3px;
+    }
+    #status {
+      margin-top: 24px;
+      padding: 16px 18px;
+      border-left: 5px solid #2e7d32;
+      background: #eaf5ed;
+      font-weight: 650;
+      min-height: 28px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>WGA Browser Trial Ready</h1>
+    <p>This local page proves browser automation without depending on the public internet.</p>
+    <button id="confirm" type="button">Confirm Browser Trial</button>
+    <div id="status" role="status" aria-live="polite">Status: waiting</div>
+  </main>
+  <script>
+    document.getElementById("confirm").addEventListener("click", function () {
+      document.getElementById("status").textContent = "Status: browser automation confirmed";
+      document.title = "WGA Browser Trial Confirmed";
+    });
+  </script>
+</body>
+</html>

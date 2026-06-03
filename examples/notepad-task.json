@@ -1,0 +1,65 @@
+{
+  "name": "notepad-task-demo",
+  "retry": 1,
+  "retryDelayMs": 500,
+  "steps": [
+    {
+      "label": "reset notepad file",
+      "action": "run",
+      "file": "powershell.exe",
+      "arguments": "-NoProfile -ExecutionPolicy Bypass -Command \"Get-Process notepad -ErrorAction SilentlyContinue | Stop-Process -Force; New-Item -ItemType Directory -Path C:\\\\GuiAgent\\\\scratch -Force | Out-Null; Set-Content -Path C:\\\\GuiAgent\\\\scratch\\\\wga-notepad-task.txt -Value '' -NoNewline -Encoding UTF8\""
+    },
+    {
+      "label": "wait after reset",
+      "sleepMs": 500
+    },
+    {
+      "label": "open notepad",
+      "action": "run",
+      "file": "notepad.exe",
+      "arguments": "C:\\GuiAgent\\scratch\\wga-notepad-task.txt",
+      "waitForWindowTitleContains": "wga-notepad-task",
+      "waitTimeoutMs": 10000,
+      "delayMs": 700
+    },
+    {
+      "label": "activate notepad",
+      "action": "activate_window",
+      "titleContains": "wga-notepad-task",
+      "expect": {
+        "activeWindowTitleContains": "wga-notepad-task"
+      }
+    },
+    {
+      "label": "maximize notepad",
+      "action": "maximize_window",
+      "titleContains": "wga-notepad-task",
+      "expect": {
+        "activeWindowTitleContains": "wga-notepad-task"
+      }
+    },
+    {
+      "label": "write via uia",
+      "retry": 1,
+      "action": "uia_set_text",
+      "windowTitleContains": "wga-notepad-task",
+      "controlType": "Document",
+      "text": "task dsl line one\\ntask dsl line two",
+      "expect": {
+        "uiaExists": {
+          "windowTitleContains": "wga-notepad-task",
+          "controlType": "Document",
+          "nameContains": "文本编辑器",
+          "includeOffscreen": false,
+          "limit": 1
+        }
+      }
+    },
+    {
+      "label": "verify active window",
+      "verify": {
+        "activeWindowTitleContains": "wga-notepad-task"
+      }
+    }
+  ]
+}

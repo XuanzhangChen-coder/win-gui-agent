@@ -1,0 +1,136 @@
+{
+  "name": "kicad-pic-programmer-demo",
+  "retry": 1,
+  "retryDelayMs": 1000,
+  "steps": [
+    {
+      "label": "reset old KiCad processes",
+      "action": "run",
+      "file": "powershell.exe",
+      "arguments": "-NoProfile -ExecutionPolicy Bypass -Command \"Get-Process kicad,eeschema,pcbnew -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue; Start-Sleep -Milliseconds 900\""
+    },
+    {
+      "label": "open KiCad demo project",
+      "action": "run",
+      "file": "C:\\Program Files\\KiCad\\10.0\\bin\\kicad.exe",
+      "arguments": "C:\\EE-Projects\\wga-kicad-demo\\pic_programmer\\pic_programmer.kicad_pro",
+      "waitForWindowTitleContains": "pic_programmer",
+      "waitTimeoutMs": 20000,
+      "waitIntervalMs": 500,
+      "expect": {
+        "windowExists": {
+          "titleContains": "pic_programmer"
+        }
+      }
+    },
+    {
+      "label": "handle file open warning if present",
+      "action": "uia_click",
+      "windowTitleContains": "文件打开警告",
+      "nameContains": "仍要打开",
+      "includeOffscreen": false,
+      "retry": 0,
+      "optional": true
+    },
+    {
+      "label": "activate KiCad project manager",
+      "action": "activate_window",
+      "titleContains": "KiCad 10.0",
+      "expect": {
+        "activeWindowTitleContains": "pic_programmer"
+      }
+    },
+    {
+      "label": "verify schematic launcher",
+      "verify": {
+        "uiaExists": {
+          "windowTitleContains": "pic_programmer",
+          "nameContains": "原理图编辑器",
+          "includeOffscreen": false,
+          "limit": 1
+        }
+      }
+    },
+    {
+      "label": "verify pcb launcher",
+      "verify": {
+        "uiaExists": {
+          "windowTitleContains": "pic_programmer",
+          "nameContains": "PCB 编辑器",
+          "includeOffscreen": false,
+          "limit": 1
+        }
+      }
+    },
+    {
+      "label": "open schematic editor",
+      "action": "run",
+      "file": "C:\\Program Files\\KiCad\\10.0\\bin\\eeschema.exe",
+      "arguments": "C:\\EE-Projects\\wga-kicad-demo\\pic_programmer\\pic_programmer.kicad_sch",
+      "waitForWindowTitleContains": "原理图编辑器",
+      "waitTimeoutMs": 20000,
+      "waitIntervalMs": 500,
+      "expect": {
+        "windowExists": {
+          "titleContains": "原理图编辑器"
+        }
+      }
+    },
+    {
+      "label": "open pcb editor",
+      "action": "run",
+      "file": "C:\\Program Files\\KiCad\\10.0\\bin\\pcbnew.exe",
+      "arguments": "C:\\EE-Projects\\wga-kicad-demo\\pic_programmer\\pic_programmer.kicad_pcb",
+      "waitForWindowTitleContains": "PCB 编辑器",
+      "waitTimeoutMs": 20000,
+      "waitIntervalMs": 500,
+      "expect": {
+        "windowExists": {
+          "titleContains": "PCB 编辑器"
+        }
+      }
+    },
+    {
+      "label": "activate pcb editor",
+      "action": "activate_window",
+      "titleContains": "PCB 编辑器",
+      "expect": {
+        "activeWindowTitleContains": "PCB 编辑器"
+      }
+    },
+    {
+      "label": "verify exported schematic pdf exists",
+      "verify": {
+        "fileExists": {
+          "path": "C:\\EE-Projects\\wga-kicad-demo\\outputs\\schematic.pdf"
+        }
+      }
+    },
+    {
+      "label": "verify exported gerber exists",
+      "verify": {
+        "fileExists": {
+          "path": "C:\\EE-Projects\\wga-kicad-demo\\outputs\\gerbers\\pic_programmer-top_layer.gtl"
+        }
+      }
+    },
+    {
+      "label": "verify erc report",
+      "verify": {
+        "fileTextContains": {
+          "path": "C:\\EE-Projects\\wga-kicad-demo\\outputs\\erc.rpt",
+          "text": "0"
+        }
+      }
+    },
+    {
+      "label": "verify drc report",
+      "verify": {
+        "fileTextContains": {
+          "path": "C:\\EE-Projects\\wga-kicad-demo\\outputs\\drc.rpt",
+          "text": "0"
+        }
+      }
+    }
+  ]
+}

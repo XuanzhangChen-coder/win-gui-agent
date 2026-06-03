@@ -1,0 +1,87 @@
+{
+  "name": "text-pad-ocr-demo",
+  "retry": 2,
+  "retryDelayMs": 500,
+  "steps": [
+    {
+      "label": "reset text pad",
+      "action": "run",
+      "file": "powershell.exe",
+      "arguments": "-NoProfile -ExecutionPolicy Bypass -Command \"Get-Process powershell -ErrorAction SilentlyContinue | Where-Object { $_.MainWindowTitle -like '*WGA Text Pad*' } | Stop-Process -Force\""
+    },
+    {
+      "label": "open text pad",
+      "action": "run",
+      "file": "powershell.exe",
+      "arguments": "-NoProfile -ExecutionPolicy Bypass -File C:\\GuiAgent\\win-gui-agent\\examples\\text-pad.ps1",
+      "waitForWindowTitleContains": "WGA Text Pad",
+      "waitTimeoutMs": 10000,
+      "delayMs": 500
+    },
+    {
+      "label": "activate text pad",
+      "action": "activate_window",
+      "titleContains": "WGA Text Pad",
+      "expect": {
+        "activeWindowTitleContains": "WGA Text Pad"
+      }
+    },
+    {
+      "label": "maximize text pad",
+      "action": "maximize_window",
+      "titleContains": "WGA Text Pad",
+      "expect": {
+        "activeWindowTitleContains": "WGA Text Pad"
+      }
+    },
+    {
+      "label": "write ocr target text",
+      "action": "uia_set_text",
+      "windowTitleContains": "WGA Text Pad",
+      "classNameContains": "WindowsForms10.EDIT",
+      "text": "gui agent ocr target line one\\r\\nvisible next cancel install words",
+      "expect": {
+        "uiaExists": {
+          "windowTitleContains": "WGA Text Pad",
+          "classNameContains": "WindowsForms10.EDIT",
+          "includeOffscreen": false,
+          "limit": 1
+        }
+      }
+    },
+    {
+      "label": "verify text by bounded ocr",
+      "verify": {
+        "ocrTextContains": {
+          "text": "target",
+          "language": "eng",
+          "psm": 6,
+          "left": 0,
+          "top": 20,
+          "right": 620,
+          "bottom": 120
+        }
+      }
+    },
+    {
+      "label": "click target by bounded ocr",
+      "action": "ocr_click_text",
+      "text": "target",
+      "language": "eng",
+      "psm": 6,
+      "minConfidence": 40,
+      "left": 0,
+      "top": 20,
+      "right": 620,
+      "bottom": 120,
+      "expect": {
+        "activeWindowTitleContains": "WGA Text Pad"
+      }
+    },
+    {
+      "label": "close text pad",
+      "action": "close_window",
+      "titleContains": "WGA Text Pad"
+    }
+  ]
+}

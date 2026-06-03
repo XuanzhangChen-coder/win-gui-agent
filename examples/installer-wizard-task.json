@@ -1,0 +1,118 @@
+{
+  "name": "installer-wizard-demo",
+  "retry": 2,
+  "retryDelayMs": 700,
+  "steps": [
+    {
+      "label": "reset installer state",
+      "action": "run",
+      "file": "powershell.exe",
+      "arguments": "-NoProfile -ExecutionPolicy Bypass -Command \"Get-Process powershell -ErrorAction SilentlyContinue | Where-Object { $_.MainWindowTitle -like '*WGA Trial Installer*' } | Stop-Process -Force; Remove-Item C:\\GuiAgent\\trial-install -Recurse -Force -ErrorAction SilentlyContinue\"",
+      "delayMs": 700
+    },
+    {
+      "label": "open installer wizard",
+      "action": "run",
+      "file": "powershell.exe",
+      "arguments": "-NoProfile -ExecutionPolicy Bypass -File C:\\GuiAgent\\win-gui-agent\\examples\\installer-wizard.ps1",
+      "delayMs": 1000
+    },
+    {
+      "label": "wait for welcome page",
+      "timeoutMs": 10000,
+      "intervalMs": 500,
+      "waitFor": {
+        "activeWindowTitleContains": "WGA Trial Installer"
+      }
+    },
+    {
+      "label": "welcome next",
+      "action": "uia_click",
+      "windowTitleContains": "WGA Trial Installer",
+      "name": "Next",
+      "isEnabled": true,
+      "includeOffscreen": false,
+      "expect": {
+        "uiaExists": {
+          "windowTitleContains": "WGA Trial Installer",
+          "name": "I accept the trial installer terms",
+          "includeOffscreen": false,
+          "limit": 1
+        }
+      }
+    },
+    {
+      "label": "accept terms",
+      "action": "uia_click",
+      "windowTitleContains": "WGA Trial Installer",
+      "name": "I accept the trial installer terms",
+      "isEnabled": true,
+      "includeOffscreen": false,
+      "expect": {
+        "uiaExists": {
+          "windowTitleContains": "WGA Trial Installer",
+          "name": "Next",
+          "isEnabled": true,
+          "includeOffscreen": false,
+          "limit": 1
+        }
+      }
+    },
+    {
+      "label": "license next",
+      "action": "uia_click",
+      "windowTitleContains": "WGA Trial Installer",
+      "name": "Next",
+      "isEnabled": true,
+      "includeOffscreen": false,
+      "expect": {
+        "uiaExists": {
+          "windowTitleContains": "WGA Trial Installer",
+          "nameContains": "Choose Install Location",
+          "includeOffscreen": false,
+          "limit": 1
+        }
+      }
+    },
+    {
+      "label": "start install",
+      "action": "uia_click",
+      "windowTitleContains": "WGA Trial Installer",
+      "name": "Install",
+      "isEnabled": true,
+      "includeOffscreen": false,
+      "delayMs": 1200
+    },
+    {
+      "label": "wait for completion",
+      "timeoutMs": 10000,
+      "intervalMs": 500,
+      "waitFor": {
+        "uiaExists": {
+          "windowTitleContains": "WGA Trial Installer",
+          "name": "Finish",
+          "isEnabled": true,
+          "includeOffscreen": false,
+          "limit": 1
+        }
+      }
+    },
+    {
+      "label": "verify install marker",
+      "verify": {
+        "fileTextContains": {
+          "path": "C:\\GuiAgent\\trial-install\\installed.txt",
+          "text": "WGA trial installer completed"
+        }
+      }
+    },
+    {
+      "label": "finish installer",
+      "action": "uia_click",
+      "windowTitleContains": "WGA Trial Installer",
+      "name": "Finish",
+      "isEnabled": true,
+      "includeOffscreen": false
+    }
+  ]
+}

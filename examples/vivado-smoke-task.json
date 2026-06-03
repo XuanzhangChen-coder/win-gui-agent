@@ -1,0 +1,73 @@
+{
+  "name": "vivado-smoke-demo",
+  "retry": 2,
+  "retryDelayMs": 1000,
+  "steps": [
+    {
+      "label": "activate vivado",
+      "action": "activate_window",
+      "titleContains": "Vivado",
+      "expect": {
+        "activeWindowTitleContains": "Vivado"
+      }
+    },
+    {
+      "label": "maximize vivado",
+      "action": "maximize_window",
+      "titleContains": "Vivado",
+      "expect": {
+        "activeWindowTitleContains": "Vivado"
+      }
+    },
+    {
+      "label": "wait for vivado foreground",
+      "timeoutMs": 10000,
+      "intervalMs": 500,
+      "waitFor": {
+        "activeWindowTitleContains": "Vivado"
+      }
+    },
+    {
+      "label": "verify vivado top chrome by ocr",
+      "verify": {
+        "ocrTextContains": {
+          "text": "Vivado",
+          "language": "eng",
+          "psm": 6,
+          "left": 0,
+          "top": 0,
+          "right": 1440,
+          "bottom": 220
+        }
+      }
+    },
+    {
+      "label": "verify quick start by ocr",
+      "verify": {
+        "ocrTextContains": {
+          "text": "Quick",
+          "language": "eng",
+          "psm": 6,
+          "left": 0,
+          "top": 80,
+          "right": 900,
+          "bottom": 520
+        }
+      }
+    },
+    {
+      "label": "verify create project by ocr",
+      "verify": {
+        "ocrTextContains": {
+          "text": "Create",
+          "language": "eng",
+          "psm": 6,
+          "left": 0,
+          "top": 80,
+          "right": 900,
+          "bottom": 520
+        }
+      }
+    }
+  ]
+}

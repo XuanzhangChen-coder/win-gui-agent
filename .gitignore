@@ -1,0 +1,16 @@
+__pycache__/
+.pytest_cache/
+.venv/
+*.pyc
+*.pyo
+runs/
+*.log
+*.tmp
+*.png
+*.jpg
+*.jpeg
+*.zip
+*.tar.gz
+*.7z
+*.exe
+*.msi
