@@ -130,8 +130,12 @@ python3 client/run_task.py examples/ltspice-lowpass-task.json \
   - Branch: `main`
   - Commit: `Initial win-gui-agent release`
   - Preflight from the committed tree: 12 tests passed, `preflight ok`.
-- Persistent local release repository: `/home/xuan/FPGA/win-gui-agent-release`, branch `main`, tag `v0.1.0`.
+- Persistent local release repository: `/home/xuan/FPGA/win-gui-agent-release`, branch `main`, latest tag `v0.1.1`.
 - Release archives:
+  - `/home/xuan/FPGA/releases/win-gui-agent-0.1.1.tar.gz`
+  - `/home/xuan/FPGA/releases/win-gui-agent-0.1.1.zip`
+  - `/home/xuan/FPGA/releases/win-gui-agent-0.1.1.sha256`
+  - Historical v0.1.0 archives:
   - `/home/xuan/FPGA/releases/win-gui-agent-0.1.0.tar.gz`
   - `/home/xuan/FPGA/releases/win-gui-agent-0.1.0.zip`
   - `/home/xuan/FPGA/releases/win-gui-agent-0.1.0.sha256`

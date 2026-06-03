@@ -117,10 +117,10 @@ Publication dry run:
   - Result: committed tree passed `scripts/preflight.py .`.
 - Persistent release repository: `/home/xuan/FPGA/win-gui-agent-release`
   - Branch: `main`
-  - Tag: `v0.1.0`
-  - Commit message: `Initial win-gui-agent release`
-  - Archives: `/home/xuan/FPGA/releases/win-gui-agent-0.1.0.tar.gz` and `/home/xuan/FPGA/releases/win-gui-agent-0.1.0.zip`
-  - Archive check: extracted tarball passed `scripts/preflight.py`.
+  - Initial tag: `v0.1.0`
+  - Latest tag after the LTspice extension: `v0.1.1`
+  - Archives: `/home/xuan/FPGA/releases/win-gui-agent-0.1.1.tar.gz` and `/home/xuan/FPGA/releases/win-gui-agent-0.1.1.zip`
+  - Archive check: extracted v0.1.1 tarball passed `scripts/preflight.py`.
 
 ## Known Limitation
 
