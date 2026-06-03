@@ -2,7 +2,7 @@
 
 ## v0.1.1 - 2026-06-03
 
-- Added an LTspice real-software trial that installs/launches LTspice 26, handles first-run dialogs, opens the bundled `2ndOrderLowpass` schematic, and extends the engineering suite to run KiCad plus LTspice.
+- Added an LTspice real-software trial that installs/launches LTspice 26, runs a batch RC-filter simulation with `.raw`/`.log` outputs, handles first-run dialogs, opens the bundled `2ndOrderLowpass` schematic, and extends the engineering suite to run KiCad plus LTspice.
 
 ## v0.1.0 - 2026-06-03
 

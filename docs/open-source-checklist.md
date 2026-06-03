@@ -148,8 +148,8 @@ python3 client/run_task.py examples/ltspice-lowpass-task.json \
 - KiCad engineering suite: `runs/engineering-suite-3loop-report-20260603-r2.json`, ok, 3 loops, 3 child task runs, 29.383 seconds.
 - KiCad evidence screenshots: `wga-kicad-project.png`, `wga-kicad-schematic.png`, `wga-kicad-pcb.png` in the local VM shared folder. Treat these as optional published evidence, not source files.
 - LTspice install: MSI exit code `0`; Windows Installer logged LTspice 26.0.2.1 installation/reconfiguration success.
-- LTspice task: `runs/ltspice-lowpass-task-report-20260603-r3.json`, ok, 11 steps, active window `LTspice - [2ndOrderLowpass]`.
-- Engineering suite with KiCad and LTspice: `runs/engineering-suite-kicad-ltspice-report-20260603.json`, ok, 1 loop, 2 child task runs, 17.897 seconds.
+- LTspice task: `runs/ltspice-lowpass-sim-task-report-20260603.json`, ok, 13 steps, `rc_filter.raw` and `vout_final` in `rc_filter.log` verified, active window `LTspice - [2ndOrderLowpass]`.
+- Engineering suite with KiCad and LTspice: `runs/engineering-suite-kicad-ltspice-sim-report-20260603.json`, ok, 1 loop, 2 child task runs, 14.204 seconds.
 
 ## Known Limits
 

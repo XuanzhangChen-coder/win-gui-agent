@@ -47,7 +47,7 @@ The PowerShell/.NET MVP can currently:
 - expose optional Tesseract-backed OCR endpoints when an OCR backend is installed;
 - constrain OCR to screen regions and click a word by OCR-derived coordinates.
 - run a real KiCad engineering project trial that opens schematic/PCB editors and verifies exported ERC/DRC/PDF/Gerber/Drill artifacts;
-- run a real LTspice trial that handles first-run dialogs and opens an analog schematic project.
+- run a real LTspice trial that simulates an RC filter, verifies raw/log outputs, handles first-run dialogs, and opens an analog schematic project.
 
 Validation notes:
 

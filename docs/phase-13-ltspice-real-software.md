@@ -32,9 +32,12 @@ C:\GuiAgent\win-gui-agent\examples\ltspice-prepare-lowpass.ps1
 Output:
 
 - `C:\EE-Projects\wga-ltspice-demo\2ndOrderLowpass.asc`
+- `C:\EE-Projects\wga-ltspice-demo\rc_filter.cir`
+- `C:\EE-Projects\wga-ltspice-demo\rc_filter.raw`
+- `C:\EE-Projects\wga-ltspice-demo\rc_filter.log`
 - `C:\EE-Projects\wga-ltspice-demo\ltspice-demo-manifest.txt`
 
-## GUI Trial
+## Simulation And GUI Trial
 
 Task file:
 
@@ -55,21 +58,26 @@ Validated GUI behavior:
 
 - Resets stale LTspice processes.
 - Prepares a writable demo project from LTspice's bundled examples.
+- Runs a generated RC-filter netlist through `LTspice.exe -b`.
+- Verifies `rc_filter.raw` exists.
+- Verifies `rc_filter.log` contains the measured `vout_final` value.
 - Launches `LTspice.exe` with the schematic path.
 - Handles the first-run `Anonymously Share LTspice Usage Data` modal as optional recovery.
 - Handles LTspice one-time `Tool Change Log` and `New Keyboard Shortcuts` dialogs as optional recovery.
 - Waits for the real schematic window by the stable schematic title.
 - Activates the schematic window and verifies the project file content.
 
-This trial is intentionally GUI-focused. LTspice's batch simulation mode is useful, but the purpose here is to prove the Windows-internal agent can observe, recover from first-run modal state, and control the desktop application itself.
+This trial intentionally combines product-level simulation evidence with GUI evidence. The batch simulation proves LTspice ran a circuit and produced results; the GUI steps prove the Windows-internal agent can observe, recover from first-run modal state, and control the desktop application itself.
 
 Observed evidence:
 
-- `runs/ltspice-lowpass-task-report-20260603-r3.json`: `ok`, 11 steps, active window `LTspice - [2ndOrderLowpass]`.
-- `runs/engineering-suite-kicad-ltspice-report-20260603.json`: `ok`, 1 loop, 2 child task runs, 17.897 seconds.
+- `runs/ltspice-lowpass-sim-task-report-20260603.json`: `ok`, 13 steps, raw/log simulation output verified, active window `LTspice - [2ndOrderLowpass]`.
+- `runs/engineering-suite-kicad-ltspice-sim-report-20260603.json`: `ok`, 1 loop, 2 child task runs, 14.204 seconds.
+- Simulation measurement:
+  - `vout_final: V(out) =3.64633274078 at 0.005`
 - Child reports:
-  - `runs/engineering-suite-kicad-ltspice-report-20260603-1-kicad-pic-programmer-task.json`
-  - `runs/engineering-suite-kicad-ltspice-report-20260603-1-ltspice-lowpass-task.json`
+  - `runs/engineering-suite-kicad-ltspice-sim-report-20260603-1-kicad-pic-programmer-task.json`
+  - `runs/engineering-suite-kicad-ltspice-sim-report-20260603-1-ltspice-lowpass-task.json`
 
 ## Notes
 

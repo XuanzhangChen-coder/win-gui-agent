@@ -30,6 +30,25 @@
       }
     },
     {
+      "label": "wait for LTspice simulation raw output",
+      "timeoutMs": 10000,
+      "intervalMs": 500,
+      "waitFor": {
+        "fileExists": {
+          "path": "C:\\EE-Projects\\wga-ltspice-demo\\rc_filter.raw"
+        }
+      }
+    },
+    {
+      "label": "verify LTspice simulation measurement",
+      "verify": {
+        "fileTextContains": {
+          "path": "C:\\EE-Projects\\wga-ltspice-demo\\rc_filter.log",
+          "text": "vout_final"
+        }
+      }
+    },
+    {
       "label": "launch LTspice lowpass schematic",
       "action": "run",
       "file": "C:\\Users\\xuan\\AppData\\Local\\Programs\\ADI\\LTspice\\LTspice.exe",

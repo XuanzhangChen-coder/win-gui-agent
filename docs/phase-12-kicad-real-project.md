@@ -105,6 +105,7 @@ Evidence reports:
 - `runs/engineering-suite-report-20260603.json`
 - `runs/engineering-suite-3loop-report-20260603-r2.json`
 - `runs/engineering-suite-kicad-ltspice-report-20260603.json` after extending the engineering suite with LTspice: `ok`, 1 loop, 2 child task runs.
+- `runs/engineering-suite-kicad-ltspice-sim-report-20260603.json` after adding LTspice simulation-output checks: `ok`, 1 loop, 2 child task runs.
 
 Publication dry run:
 

@@ -6,6 +6,10 @@ This release adds a second real engineering-software validation target on top of
 
 - Added an LTspice 26 real-software GUI trial.
 - Added a setup script that prepares a writable `2ndOrderLowpass` schematic project from LTspice's bundled examples.
+- Added LTspice batch simulation evidence for a generated RC filter netlist:
+  - `rc_filter.raw`
+  - `rc_filter.log`
+  - measured `vout_final`
 - Added optional recovery for LTspice first-run dialogs:
   - `Anonymously Share LTspice Usage Data`
   - `LTspice Tool Change Log`
@@ -20,7 +24,8 @@ Latest local validation before this release package:
 ```text
 Unit tests: 12 passed
 Preflight: ok
-LTspice task: 11 steps passed
+LTspice task: 13 steps passed
+LTspice simulation: rc_filter.raw exists, rc_filter.log contains vout_final
 Engineering suite: KiCad plus LTspice passed
 Engineering suite child task runs: 2
 30-minute unattended smoke suite: 43 loops, 215 child task runs, 1824.524 seconds
