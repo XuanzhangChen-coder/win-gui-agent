@@ -46,7 +46,8 @@ The PowerShell/.NET MVP can currently:
 - write task run reports with retry and manual resume support;
 - expose optional Tesseract-backed OCR endpoints when an OCR backend is installed;
 - constrain OCR to screen regions and click a word by OCR-derived coordinates.
-- run a real KiCad engineering project trial that opens schematic/PCB editors and verifies exported ERC/DRC/PDF/Gerber/Drill artifacts.
+- run a real KiCad engineering project trial that opens schematic/PCB editors and verifies exported ERC/DRC/PDF/Gerber/Drill artifacts;
+- run a real LTspice trial that handles first-run dialogs and opens an analog schematic project.
 
 Validation notes:
 
@@ -58,6 +59,7 @@ Validation notes:
 - Phase 10: [docs/phase-10-real-software-trials.md](docs/phase-10-real-software-trials.md)
 - Phase 11: [docs/phase-11-unattended-smoke-suite.md](docs/phase-11-unattended-smoke-suite.md)
 - Phase 12: [docs/phase-12-kicad-real-project.md](docs/phase-12-kicad-real-project.md)
+- Phase 13: [docs/phase-13-ltspice-real-software.md](docs/phase-13-ltspice-real-software.md)
 
 ## Quickstart
 
@@ -138,6 +140,14 @@ Run the KiCad real-project trial after KiCad is installed:
 python3 client/run_task.py examples/kicad-pic-programmer-task.json \
   --base-url http://127.0.0.1:8765 \
   --report runs/kicad-pic-programmer-task-report.json
+```
+
+Run the LTspice real-software trial after LTspice is installed:
+
+```bash
+python3 client/run_task.py examples/ltspice-lowpass-task.json \
+  --base-url http://127.0.0.1:8765 \
+  --report runs/ltspice-lowpass-task-report.json
 ```
 
 Run the short unattended smoke suite:

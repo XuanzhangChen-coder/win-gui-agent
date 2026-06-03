@@ -6,6 +6,10 @@
     {
       "label": "kicad pic programmer",
       "path": "examples/kicad-pic-programmer-task.json"
+    },
+    {
+      "label": "ltspice lowpass",
+      "path": "examples/ltspice-lowpass-task.json"
     }
   ]
 }

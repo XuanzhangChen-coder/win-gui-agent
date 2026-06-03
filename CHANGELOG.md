@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Added an LTspice real-software trial that installs/launches LTspice 26, handles first-run dialogs, opens the bundled `2ndOrderLowpass` schematic, and extends the engineering suite to run KiCad plus LTspice.
+
 ## v0.1.0 - 2026-06-03
 
 - Added the Windows-internal GUI agent MVP with screenshot, mouse, keyboard, window, UI Automation, OCR, verifier, task-runner, and suite-runner primitives.

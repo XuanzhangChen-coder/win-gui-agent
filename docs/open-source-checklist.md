@@ -113,6 +113,15 @@ python3 client/run_suite.py examples/engineering-suite.json \
   --quiet-tasks
 ```
 
+8. If LTspice 26 is installed on the Windows VM, run the LTspice real-software task:
+
+```bash
+python3 client/run_task.py examples/ltspice-lowpass-task.json \
+  --base-url http://127.0.0.1:8765 \
+  --report runs/ltspice-lowpass-task-report.json \
+  --quiet
+```
+
 ## Current Evidence
 
 - Unit tests: 12 tests pass on Ubuntu without a Windows VM.
@@ -134,6 +143,9 @@ python3 client/run_suite.py examples/engineering-suite.json \
 - KiCad real-project task: `runs/kicad-pic-programmer-task-report-20260603.json`, ok.
 - KiCad engineering suite: `runs/engineering-suite-3loop-report-20260603-r2.json`, ok, 3 loops, 3 child task runs, 29.383 seconds.
 - KiCad evidence screenshots: `wga-kicad-project.png`, `wga-kicad-schematic.png`, `wga-kicad-pcb.png` in the local VM shared folder. Treat these as optional published evidence, not source files.
+- LTspice install: MSI exit code `0`; Windows Installer logged LTspice 26.0.2.1 installation/reconfiguration success.
+- LTspice task: `runs/ltspice-lowpass-task-report-20260603-r3.json`, ok, 11 steps, active window `LTspice - [2ndOrderLowpass]`.
+- Engineering suite with KiCad and LTspice: `runs/engineering-suite-kicad-ltspice-report-20260603.json`, ok, 1 loop, 2 child task runs, 17.897 seconds.
 
 ## Known Limits
 
@@ -143,3 +155,4 @@ python3 client/run_suite.py examples/engineering-suite.json \
 - Windows 11 Notepad can restore old tabs after repeated forced resets. Use the controlled Text Pad fixture for long unattended reliability checks and keep Notepad as a real-application demo.
 - The KiCad demo requires KiCad 10.0.x installed at `C:\Program Files\KiCad\10.0`. It uses KiCad's bundled demo project and should not publish installers or third-party license files.
 - The current VM falls back to KiCad software rendering because OpenGL 2.1 is unavailable. The 2D schematic/PCB workflow is valid, but 3D Viewer should not be a required public demo on this VM.
+- The LTspice demo requires LTspice 26.x installed at `C:\Users\xuan\AppData\Local\Programs\ADI\LTspice`. It copies a bundled educational schematic into `C:\EE-Projects\wga-ltspice-demo` and does not publish installer files.

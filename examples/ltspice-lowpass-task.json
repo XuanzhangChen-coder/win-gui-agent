@@ -1,0 +1,102 @@
+{
+  "name": "ltspice-lowpass-demo",
+  "retry": 1,
+  "retryDelayMs": 1000,
+  "steps": [
+    {
+      "label": "reset old LTspice processes",
+      "action": "run",
+      "file": "powershell.exe",
+      "arguments": "-NoProfile -ExecutionPolicy Bypass -Command \"Get-Process LTspice -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue; Start-Sleep -Milliseconds 500\""
+    },
+    {
+      "label": "prepare LTspice lowpass demo",
+      "action": "run",
+      "file": "powershell.exe",
+      "arguments": "-NoProfile -ExecutionPolicy Bypass -File C:\\GuiAgent\\win-gui-agent\\examples\\ltspice-prepare-lowpass.ps1",
+      "expect": {
+        "fileExists": {
+          "path": "C:\\EE-Projects\\wga-ltspice-demo\\2ndOrderLowpass.asc"
+        }
+      }
+    },
+    {
+      "label": "verify LTspice manifest",
+      "verify": {
+        "fileTextContains": {
+          "path": "C:\\EE-Projects\\wga-ltspice-demo\\ltspice-demo-manifest.txt",
+          "text": "LTspice demo prepared"
+        }
+      }
+    },
+    {
+      "label": "launch LTspice lowpass schematic",
+      "action": "run",
+      "file": "C:\\Users\\xuan\\AppData\\Local\\Programs\\ADI\\LTspice\\LTspice.exe",
+      "arguments": "C:\\EE-Projects\\wga-ltspice-demo\\2ndOrderLowpass.asc"
+    },
+    {
+      "label": "decline LTspice usage data prompt if present",
+      "action": "uia_click",
+      "windowTitleContains": "Anonymously Share LTspice Usage Data",
+      "nameContains": "No, do not send",
+      "classNameContains": "Button",
+      "includeOffscreen": false,
+      "retry": 0,
+      "optional": true
+    },
+    {
+      "label": "confirm LTspice usage data prompt if present",
+      "action": "uia_click",
+      "windowTitleContains": "Anonymously Share LTspice Usage Data",
+      "name": "OK",
+      "classNameContains": "Button",
+      "includeOffscreen": false,
+      "retry": 0,
+      "optional": true
+    },
+    {
+      "label": "close LTspice change log if present",
+      "action": "close_window",
+      "titleContains": "LTspice Tool Change Log",
+      "classNameContains": "#32770",
+      "retry": 0,
+      "optional": true
+    },
+    {
+      "label": "close LTspice keyboard shortcuts notice if present",
+      "action": "close_window",
+      "titleContains": "New Keyboard Shortcuts",
+      "classNameContains": "#32770",
+      "retry": 0,
+      "optional": true
+    },
+    {
+      "label": "wait for lowpass schematic window",
+      "timeoutMs": 20000,
+      "intervalMs": 500,
+      "waitFor": {
+        "windowExists": {
+          "titleContains": "2ndOrderLowpass"
+        }
+      }
+    },
+    {
+      "label": "activate lowpass schematic window",
+      "action": "activate_window",
+      "titleContains": "2ndOrderLowpass",
+      "expect": {
+        "activeWindowTitleContains": "2ndOrderLowpass"
+      }
+    },
+    {
+      "label": "verify schematic file content",
+      "verify": {
+        "fileTextContains": {
+          "path": "C:\\EE-Projects\\wga-ltspice-demo\\2ndOrderLowpass.asc",
+          "text": ".param f0=1e3"
+        }
+      }
+    }
+  ]
+}

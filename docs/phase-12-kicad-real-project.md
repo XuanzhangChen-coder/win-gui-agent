@@ -15,6 +15,7 @@ Validate that the Windows-internal GUI agent can operate a real engineering GUI 
 - LTspice 26.0.2.1
   - Installer: `C:\Users\xuan\Downloads\LTspice64.msi`
   - Silent install command: `msiexec /i LTspice64.msi /qn /norestart /L*v C:\Tools\logs\ltspice-install-20260603.log`
+  - Real-software GUI validation: [phase 13](phase-13-ltspice-real-software.md)
 
 ## Important Agent Changes
 
@@ -103,6 +104,7 @@ Evidence reports:
 - `runs/kicad-pic-programmer-task-report-20260603.json`
 - `runs/engineering-suite-report-20260603.json`
 - `runs/engineering-suite-3loop-report-20260603-r2.json`
+- `runs/engineering-suite-kicad-ltspice-report-20260603.json` after extending the engineering suite with LTspice: `ok`, 1 loop, 2 child task runs.
 
 Publication dry run:
 
